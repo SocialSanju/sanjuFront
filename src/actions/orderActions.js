@@ -15,7 +15,7 @@ import { ORDER_CREATE_REQUEST, ORDER_CREATE_FAIL, ORDER_CREATE_SUCCESS, ORDER_CR
         const {
           userSignin: { userInfo },
         } = getState();
-        const { data } = await Axios.post('http://localhost:5000/api/orders/', order, {
+        const { data } = await Axios.post('http://3.6.86.22:5000/api/orders/', order, {
           headers: {
             Authorization: `Sanju ${userInfo.token}`,
           },
@@ -40,7 +40,7 @@ import { ORDER_CREATE_REQUEST, ORDER_CREATE_FAIL, ORDER_CREATE_SUCCESS, ORDER_CR
         userSignin: { userInfo },
       } = getState();
       try {
-        const { data } = await Axios.get(`http://localhost:5000/api/orders/${orderId}`, {
+        const { data } = await Axios.get(`http://3.6.86.22:5000/api/orders/${orderId}`, {
           headers: { Authorization: `Sanju ${userInfo.token}` },
         });
         dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
@@ -57,7 +57,7 @@ export const payOrder = (order, paymentResult) => async (dispatch, getState) => 
     dispatch({ type: ORDER_PAY_REQUEST, payload: { order, paymentResult } });
     const {userSignin: { userInfo },} = getState();
     try {
-        const { data } = Axios.put(`/api/orders/${order.id}/pay`, paymentResult, {
+        const { data } = Axios.put(`http://3.6.86.22:5000/api/orders/${order.id}/pay`, paymentResult, {
             headers: { Authorization: `Sanju ${userInfo.token}`, },
         });
         dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
@@ -76,7 +76,7 @@ export const listOrderMine = () => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     try {
-      const { data } = await Axios.get('/api/orders/mine', {
+      const { data } = await Axios.get('http://3.6.86.22:5000/api/orders/mine', {
         headers: {
           Authorization: `Sanju ${userInfo.token}`,
         },
@@ -97,7 +97,7 @@ export const listOrderMine = () => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     try {
-      const { data } = await Axios.get(`/api/orders?seller=${seller}`, {
+      const { data } = await Axios.get(`http://3.6.86.22:5000/api/orders?seller=${seller}`, {
         headers: { Authorization: `Sanju ${userInfo.token}` },
       });
       console.log(data);
@@ -119,7 +119,7 @@ export const listOrderMine = () => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     try {
-      const { data } = Axios.delete(`/api/orders/${orderId}`, {
+      const { data } = Axios.delete(`http://3.6.86.22:5000/api/orders/${orderId}`, {
         headers: { Authorization: `Sanju ${userInfo.token}` },
       });
       dispatch({ type: ORDER_DELETE_SUCCESS, payload: data });
@@ -138,7 +138,7 @@ export const listOrderMine = () => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     try {
-      const { data } = await Axios.get('/api/orders/summary', {
+      const { data } = await Axios.get('http://3.6.86.22:5000/api/orders/summary', {
         headers: { Authorization: `Sanju ${userInfo.token}` },
       });
       dispatch({ type: ORDER_SUMMARY_SUCCESS, payload: data });
@@ -160,7 +160,7 @@ export const listOrderMine = () => async (dispatch, getState) => {
     } = getState();
     try {
       const { data } = Axios.put(
-        `/api/orders/${orderId}/deliver`,
+        `http://3.6.86.22:5000/api/orders/${orderId}/deliver`,
         {},
         {
           headers: { Authorization: `Sanju ${userInfo.token}` },
